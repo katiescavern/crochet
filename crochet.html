@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="crochet.css">
+</head>
+<body>
+    <div id=stuff></div>
+        <h1 id="testing"></h1>
+        <h1 id="TT"></h1>
+        <h1 id="theCount"></h1>
+    </div>
+
+    <div id="builder">
+        <div>
+            <h4 id="selected"></h4>
+        </div>
+        <input id="numberinput" type="number">
+        <button onclick="confirm()">confirm</button>
+        <div id="buttons">
+            <button id="new" onclick="addNew()">+</button>
+            <button onclick = "custom()">custom stitch</button>
+            <button name = "single stitch" onclick="add(event)">single stitch</button>
+            <button name = "double stitch" onclick="add(event)">double stitch</button>
+            <button name = "triple stitch" onclick="add(event)">triple stitch</button>
+            <button name = "yarn over" onclick="add(event)">yarn over</button>
+        </div>
+        <button onclick ="finish()">finish</button>
+
+        <div id="content">
+
+        </div>
+
+    </div>
+
+    <script src="crochet.js"></script>
+</body>
+</html>
