@@ -1,9 +1,9 @@
 const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 const SpeechGrammarList =
-  window.SpeechGrammarList || window.webkitSpeechGrammarList;
+    window.SpeechGrammarList || window.webkitSpeechGrammarList;
 const SpeechRecognitionEvent =
-  window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+    window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
 const commands = [
     "next",
@@ -33,22 +33,22 @@ const text = document.getElementById("TT");
 recognition.onresult = (event) => {
     const lastResultIndex = event.results.length - 1;
     let userCommand = event.results[lastResultIndex][0].transcript;
-    
+
     console.log(typeof userCommand);
     userCommand = userCommand.split("");
     console.log(typeof userCommand);
     console.log(userCommand);
-    
+
     if (userCommand[0] == " ") {
         userCommand.splice(0, 1);
     }
     userCommand = userCommand.join("");
-    
+
     console.log(userCommand);
     testText.textContent = `Result received: ${userCommand}`;
     console.log(`Confidence: ${event.results[lastResultIndex][0].confidence}`);
     console.log(`Recognized: ${userCommand}`);
-    
+
     if (userCommand == "Back." || userCommand == "Next.") {
         instruct(userCommand);
     }
@@ -59,37 +59,38 @@ recognition.onresult = (event) => {
 
 recognition.onspeechend = () => {
     recognition.stop();
-  };
-  
-  recognition.onend = () => {
+};
+
+recognition.onend = () => {
     setTimeout(() => recognition.start(), 500);
-  };
-  
+};
+
 recognition.onerror = (event) => {
     console.error('Speech recognition error detected: ' + event.error);
     testText.textContent = 'Error occurred in recognition: ' + event.error;
-    recognition.start(); 
+    recognition.start();
 };
 
 const theCount = document.getElementById("theCount");
 let AP = 0;
 let StepCounter = 0;
+
 function instruct(x) {
     console.log("hit");
     let OAP = AP;
-    if (x == "Next." && StepCounter != chosenOne.length){
+    if (x == "Next." && StepCounter != chosenOne.length) {
         AP++;
         text.textContent = chosenOne[AP];
-    } else if (x == "Back."  && AP > 0){
+    } else if (x == "Back." && AP > 0) {
         AP--;
         text.textContent = chosenOne[AP];
     }
-    if (OAP != AP){
+    if (OAP != AP) {
         StepCounter = AP;
         theCount.textContent = `${StepCounter}/${chosenOne.length}`
     }
 
-    if (StepCounter == chosenOne.length){
+    if (StepCounter == chosenOne.length) {
         text.textContent = "finished round.";
         testText.textContent = "";
 
@@ -104,11 +105,12 @@ class newStitch {
 }
 
 class data {
-    constructor(id, content, reps, name) {
+    constructor(id, content, reps, name, colour) {
         this.id = id;
         this.content = content;
         this.reps = reps;
         this.name = name;
+        this.colour
     }
 }
 let selectedButton;
@@ -118,47 +120,54 @@ customChains = [];
 const content = document.getElementById("content");
 let idCounter = 0
 let buttons = []
-function add(event){
+
+function add(event) {
+    console.log(event);
     let newButton = document.createElement('button');
     let buttonObj = new data(idCounter, event.target.name, 1, event.target.name);
-    if (event.target.class = "arr"){
+    if (event.target.class = "arr") {
         //add thing where it looks through customchains and the name to find the content, and then put the content from it into a new object
-        for (let i = 0; i < customChains.length; i++){
+        for (let i = 0; i < customChains.length; i++) {
             if (customChains[i].name == event.target.name) {
                 buttonObj.content = customChains[i].content;
-                
+
             }
         }
-    } 
-        
+    }
+
     buttons.push(buttonObj);
-    
+
     newButton.id = idCounter;
     idCounter++;
     console.log(event.target.name);
     newButton.textContent = event.target.name;
-    newButton.addEventListener('click', function(){
+    newButton.style.backgroundColor = event.target.style.backgroundColor;
+    newButton.addEventListener('click', function() {
         console.log(newButton);
         colourchange(newButton.id);
         selectedButton = newButton.id;
-        
+
     })
     content.appendChild(newButton);
 }
 const selbut = document.getElementById("selected");
-
-function colourchange(x){
+let savedColour;
+function colourchange(x) {
     let newButton = document.getElementById(x);
-    if (selectedButton){
+    if (selectedButton) {
         let oldButton = document.getElementById(selectedButton);
-        oldButton.style.backgroundColor = '';
+        oldButton.style.backgroundColor = savedColour;
+        oldButton.style.color = '#ffffff'
     }
-    newButton.style.backgroundColor = '#218838';
+    savedColour = newButton.style.backgroundColor;
+    newButton.style.backgroundColor = '#ffffff';
+    newButton.style.color = "#000000";
     console.log(buttons[x]);
     selbut.textContent = `Selected Button Reps: ${buttons[x].reps}`
 }
 const numIn = document.getElementById("numberinput");
-function confirm(){
+
+function confirm() {
     let value = numIn.value;
     buttons[selectedButton].reps = value;
     selbut.textContent = `Selected Button Reps: ${buttons[selectedButton].reps}`;
@@ -166,24 +175,25 @@ function confirm(){
 }
 
 const buttonsDiv = document.getElementById("buttons");
-function custom(){
+
+function custom() {
     let nameStitch = prompt("Please enter the name of your stitch");
     let newButton = document.createElement('button');
     newButton.name = nameStitch;
     newButton.textContent = nameStitch;
-    newButton.addEventListener('click', function(){
+    newButton.addEventListener('click', function() {
         add(event);
     })
     buttonsDiv.appendChild(newButton);
 }
 
-function addNew(){
+function addNew() {
     let nameStitch = prompt("Please enter the name of your stitch");
     let newButton = document.createElement('button');
     newButton.name = nameStitch;
     newButton.textContent = nameStitch;
     newButton.class = "arr";
-    newButton.addEventListener('click', function(){
+    newButton.addEventListener('click', function() {
         add(event);
     })
     buttonsDiv.appendChild(newButton);
@@ -192,11 +202,11 @@ function addNew(){
     customChains.push(customChain);
 }
 
-function getter(){
+function getter() {
     let con = [];
-    for (let i = 0; i < buttons.length; i++){
+    for (let i = 0; i < buttons.length; i++) {
         let num = buttons[i].reps;
-        for (let j = 0; j < num; j++){
+        for (let j = 0; j < num; j++) {
             con.push(buttons[i].content);
         }
     }
@@ -212,10 +222,11 @@ function getter(){
     return con;
 }
 chosenOne = [];
-function finish(){
+
+function finish() {
     let finalArray = [];
-    for (let i = 0; i < buttons.length; i++){
-        for (let j = 0; j < buttons[i].reps; j++){
+    for (let i = 0; i < buttons.length; i++) {
+        for (let j = 0; j < buttons[i].reps; j++) {
             finalArray.push(buttons[i].content);
         }
     }
@@ -228,7 +239,7 @@ const stuff = document.getElementById("stuff");
 const builder = document.getElementById("builder");
 stuff.style.display = "none";
 
-function startup(){
+function startup() {
     builder.style.display = "none";
     stuff.style.display = "block";
     recognition.start();
@@ -236,3 +247,69 @@ function startup(){
     theCount.textContent = `${StepCounter}/${chosenOne.length}`
     testText.textContent = "say next to go to the next step, say back to go back"
 }
+
+const SM = document.getElementById("stitchMaker");
+const subbut = document.getElementById("subButton");
+const subbut2 = document.getElementById("subbut2");
+let currentColour;
+SM.style.display = "none";
+
+let colorPicker = new iro.ColorPicker("#picker", {
+    color: "#007bff"
+  });
+function creation(){
+    currentColour = null;
+    builder.style.display = "none";
+    SM.style.display = "block";
+    colorPicker.on('color:change', function(color) {
+        subbut.style.backgroundColor = color.hexString;
+        subbut2.style.backgroundColor = color.hexString;
+        currentColour = color.hexString;
+    })
+}
+
+
+const textInput = document.getElementById("textInput");
+function newName(){
+
+    let nameStitch = textInput.value;
+    if (nameStitch.length > 0){
+    let newButton = document.createElement('button');
+    newButton.name = nameStitch;
+    newButton.textContent = nameStitch;
+    newButton.style.backgroundColor = currentColour;
+    newButton.addEventListener('click', function() {
+        add(event);
+    })
+    buttonsDiv.appendChild(newButton);
+    SM.style.display = "none";
+    builder.style.display = "block";
+}
+}
+
+function newPattern(){
+    let nameStitch = textInput.value;
+    if (nameStitch.length > 0){
+        let newButton = document.createElement('button');
+    newButton.name = nameStitch;
+    newButton.textContent = nameStitch;
+    newButton.class = "arr";
+    newButton.style.backgroundColor = currentColour;
+    newButton.addEventListener('click', function() {
+        add(event);
+    })
+    buttonsDiv.appendChild(newButton);
+    let theContent = getter();
+    let customChain = new newStitch(nameStitch, theContent);
+    customChains.push(customChain);
+    }
+    SM.style.display = "none";
+    builder.style.display = "block";
+}
+
+function back(){
+    SM.style.display = "none";
+    builder.style.display = "block";
+}
+
+testText.style.display = "none";

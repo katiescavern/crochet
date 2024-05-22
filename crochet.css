@@ -1,11 +1,12 @@
 /* crochet.css */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Roboto, sans-serif;
     background-color: #f8f8f8;
     margin: 0;
     padding: 0;
 }
+
 
 #builder {
     background-color: #fff;
@@ -33,9 +34,6 @@ button {
     border-radius: 5px;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
 
 #content {
     margin-top: 20px;
@@ -46,49 +44,20 @@ button:hover {
 input[type="number"] {
     padding: 5px;
     border-radius: 3px;
-    border: 1px solid #ccc;
+    border: 1px solid #797979;
 }
 
 #buttons {
     margin-top: 10px;
 }
 
-#new {
-    background-color: #28a745;
+#credit{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-right: 5px;
 }
 
-#new:hover {
-    background-color: #218838;
-}
-
-button[name="single stitch"] {
-    background-color: #dc3545;
-}
-
-button[name="single stitch"]:hover {
-    background-color: #c82333;
-}
-
-button[name="double stitch"] {
-    background-color: #ffc107;
-}
-
-button[name="double stitch"]:hover {
-    background-color: #e0a800;
-}
-
-button[name="triple stitch"] {
-    background-color: #17a2b8;
-}
-
-button[name="triple stitch"]:hover {
-    background-color: #138496;
-}
-
-button[name="yarn over"] {
-    background-color: #6c757d;
-}
-
-button[name="yarn over"]:hover {
-    background-color: #5a6268;
+#stuff {
+    text-align: center;
 }

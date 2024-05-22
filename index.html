@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="crochet.css">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 <body>
+    <h1>Crochet Aid</h1>
     <div id=stuff></div>
         <h1 id="testing"></h1>
         <h1 id="TT"></h1>
@@ -15,19 +17,21 @@
 
     <div id="builder">
         <div>
-            <h4 id="selected"></h4>
+            <h4 id="selected"> </h4>
         </div>
         <input id="numberinput" type="number">
         <button onclick="confirm()">confirm</button>
         <div id="buttons">
-            <button id="new" onclick="addNew()">+</button>
-            <button onclick = "custom()">custom stitch</button>
-            <button name = "single stitch" onclick="add(event)">single stitch</button>
-            <button name = "double stitch" onclick="add(event)">double stitch</button>
-            <button name = "triple stitch" onclick="add(event)">triple stitch</button>
-            <button name = "yarn over" onclick="add(event)">yarn over</button>
+            <button onclick="creation()">Creation</button>
+            <button style="background-color: #dc3545;" name = "single stitch" onclick="add(event)">single stitch</button>
+            <button style="background-color: #ffc107;" name = "double stitch" onclick="add(event)">double stitch</button>
+            <button style="background-color: #17a2b8;" name = "triple stitch" onclick="add(event)">triple stitch</button>
+            <button style="background-color: #6c757d;" name = "yarn over" onclick="add(event)">yarn over</button>
         </div>
-        <button onclick ="finish()">finish</button>
+        <div>
+            <p></p>
+        </div>
+        <button onclick ="finish()">Finish</button>
 
         <div id="content">
 
@@ -35,6 +39,23 @@
 
     </div>
 
+    <div id="stitchMaker">
+        <button onclick="back()">Back</button>
+        <h3>Pick Colour</h3>
+        <div id="picker"></div>
+        <label for="textInput">Enter Name</label>
+        <input id= "textInput" type="text">
+        <div>
+        <button id="subButton" onclick="newName()">Create Stitch</button>
+        <button id="subbut2" onclick="newPattern()">Create Pattern</button>
+    </div>
+    <p>Explanation: Create stitch will add a new button with the colour and name you've provided.</p>
+    <p>Create pattern will DELETE all of the stitches on your board and turn them into a collection of stitches.</p>
+    <p>Use create stitch to add say half stitch, use create pattern to create a block that's 2sc, 1dc.</p>
+    </div>
+
+    <p id="credit">Made by Katie McTavish</p>
+    <a href="">help</a>
     <script src="crochet.js"></script>
 </body>
 </html>
